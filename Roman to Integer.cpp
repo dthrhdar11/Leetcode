@@ -1,0 +1,34 @@
+#include<iostream>
+#include<map>
+using namespace std;
+int romanToInt(string s) {
+        map<char,int> mp;
+        mp['I'] = 1;
+        mp['V'] = 5;
+        mp['X'] = 10;
+        mp['L'] = 50;
+        mp['C'] = 100;
+        mp['D'] = 500;
+        mp['M'] = 1000;
+        int ans = 0;
+        for(int i=s.length()-1;i>=0;--i){
+            if(i > 0){
+                if(mp[s[i]]  > mp[s[i-1]]){
+                    ans += (mp[s[i]] - mp[s[i-1]]);
+                    --i;
+                }
+                else{
+                    ans += mp[s[i]];
+                }
+            }
+            else{
+                ans += mp[s[i]];
+            }
+        }
+        return ans;
+    }
+int main(){
+	string s;
+	cin >> s;
+	cout << romanToInt(s) << endl;
+}
